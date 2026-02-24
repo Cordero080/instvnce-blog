@@ -24,3 +24,17 @@
                                                    | \      /   |
                                                     \  '--'    /
                                                      '--------'
+
+
+
+
+
+
+
+
+
+
+              
+                                                      [ ^ _ ^ ]
+                                          INSTVNCE-BLOG // ARCHITECT: PVBLO
+                                           "The map is not the territory."                           
