@@ -1,12 +1,11 @@
 @import url("https://use.typekit.net/naj4gbr.css");
 
 // 1. Variables
-
-$accent-warning: #f8e704; // New "High Energy" Yellow
+$accent-warning: #f8e704; 
 $bg-black: #080808; 
 $text-primary: #f9fefa;
 $accent-neon: #00ff8c;
-$accent-white: #ccedde;
+$accent-white: #eefdf6f4;
 $font-main: "omnium", sans-serif;
 
 // 2. The Foundation
@@ -32,9 +31,11 @@ html, body, #root {
   left: 0;
   width: 100vw;
   height: 100vh;
+  z-index: 5; // FIX 1: Explicitly set behind content
+  pointer-events: none; 
   background: linear-gradient(
     rgba(242, 9, 9, 0.968) 50%, 
-    rgba(0, 0, 0, 0.15) 50%
+    rgba(1, 1, 88, 0.526) 50%
   ), 
   linear-gradient(
     90deg, 
@@ -43,8 +44,6 @@ html, body, #root {
     rgba(0, 0, 255, 0.04)
   );
   background-size: 100% 4px, 4px 100%;
-  z-index: 1; 
-  pointer-events: none;
   opacity: 0.6;
 }
 
@@ -57,17 +56,15 @@ html, body, #root {
   flex-direction: column;
   align-items: center; 
   position: relative; 
-  z-index: 10; 
+  z-index: 10; // FIX 2: Explicitly set above scanlines
   
   h1 {
-    // Add this inside your h1 block
-  text-shadow: 0 0 10px rgba($text-primary, 0.2); 
-  letter-spacing: 0.1em; // Give it some architectural room to breathe
+    text-shadow: 0 0 10px rgba($text-primary, 0.2); 
+    letter-spacing: 0.1em; 
     font-size: 3.5rem;
     text-transform: uppercase;
     margin-bottom: 4rem;
     color: $text-primary;
-    text-shadow: none; 
     
     &:hover {
       color: $accent-neon;
@@ -76,174 +73,157 @@ html, body, #root {
   }
 
   .title-container {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  margin-top: 2rem;
-  margin-bottom: 3rem;
-}
-
-.architect-title {
-  font-family: "omnium", sans-serif;
-font-weight: 700;
-font-style: normal;
-font-size: 3rem;
-  color: $accent-white; // Or #fff
-  letter-spacing: 0.15em; // THIS gives you the uniform spacing control
-  text-transform: uppercase;
-  margin: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  // Applying your "neon soft cyber" aesthetic
-  text-shadow: 0 0 10px rgba($accent-neon, 0.2), 
-               0 0 20px rgba($accent-neon, 0.2);
-  
-  .bracket {
-    color: rgba($accent-neon, 0.4); // Make brackets slightly dimmer
-    margin: 0 15px; // The "buffer" space we talked about in Illustrator
-    font-weight: 300;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    margin-bottom: 3rem;
   }
-}
 
-.title-divider {
-  width: 170%;
-  height: 2px;
-  font-family: deja-vu, sans-serif;
-  background: linear-gradient(90deg, 
-    transparent 0%, 
-    rgba($accent-neon, 0.8) 50%, 
-    transparent 100%);
-  margin: 2rem 0;
-  position: relative;
-  box-shadow: 0 0 15px rgba($accent-neon, 0.4);
-
-  // Small technical detail: a "bit" indicator in the center
-  &::after {
-    content: "useWisely();";
-    position: absolute;
-    top: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    border-radius: 2px;
-    background: #000000c2;
-    padding: 0 10px;
-    font-size: 0.6rem;
-    letter-spacing: 0.2em;
-    color: $accent-neon;
+  .architect-title {
+    font-family: "omnium", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 3rem;
+    color: $accent-white; 
+    letter-spacing: 0.15em; 
+    text-transform: uppercase;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-shadow: 0 0 10px rgba($accent-neon, 0.2), 0 0 20px rgba($accent-neon, 0.2);
+    
+    .bracket {
+      color: rgba($accent-neon, 0.4); 
+      margin: 0 15px; 
+      font-weight: 300;
+    }
   }
-}
+
+  .title-divider {
+    width: 170%;
+    height: 2px;
+    font-family: deja-vu, sans-serif;
+    background: linear-gradient(90deg, transparent 0%, rgba($accent-neon, 0.8) 50%, transparent 100%);
+    margin: 2rem 0;
+    position: relative;
+    box-shadow: 0 0 15px rgba($accent-neon, 0.4);
+
+    &::after {
+      content: "useWisely();";
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 2px;
+      background: #000000c2;
+      padding: 0 10px;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      color: $accent-neon;
+    }
+  }
 
   .architect-input {
-  position: relative; 
-  z-index: 20; 
-  width: 100%;
-  margin-bottom: 4rem;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  border: 1px dashed rgba($accent-neon, 0.2); 
-  padding: 30px;
-  box-sizing: border-box;
-  
-  // Subtle base background
-  background: rgba(12, 17, 15, 0.2); 
-  transition: background 0.4s ease, border-color 0.4s ease;
-
-  // This darkens the whole box when you start typing to hide scanlines
-  &:focus-within {
-    background: rgba(8, 8, 8, 0.552); 
-    border-color: rgba($accent-neon, 0.5);
-  }
-
-  input, textarea {
-    // 1. USE background-color INSTEAD OF background TO PREVENT WIPING THE LINE
-    background-color: rgba(70, 1, 16, 0.729) !important;
-    color: #29f804; // Neon Green
-    border: none;
-    border-left: 2px solid rgba($accent-neon, 0.3);
-    outline: none;
-    padding: 12px 15px;
-    font-family: monospace;
-    font-size: 0.9rem;
-    margin-bottom: 5px;
-    display: block;
+    position: relative; 
+    z-index: 20; 
     width: 100%;
-    
-    // 2. THE BOTTOM "GOLDEN RATIO" LINE (Restored)
-    background-image: linear-gradient(#29f804, #29f804);
-    background-size: 33.33% 2px; // 1/3 Start
-    background-repeat: no-repeat;
-    background-position: bottom left;
-    
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    margin-bottom: 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    border: 1px dashed rgba($accent-neon, 0.2); 
+    padding: 30px;
+    box-sizing: border-box;
+    background: rgba(12, 17, 15, 0.98); // High opacity to block scanlines
+    transition: background 0.4s ease, border-color 0.4s ease;
 
-    &::placeholder {
-      color: rgba($text-primary, 0.5);
-      letter-spacing: 0.1em;
+    &:focus-within {
+      background: rgba(8, 8, 8, 1); 
+      border-color: rgba($accent-neon, 0.5);
     }
 
-    // 3. INDIVIDUAL FOCUS STATE
-    &:focus {
-      border-left-color: $accent-neon;
-      // Use background-color here too
-      background-color: rgba(255, 255, 255, 0.05) !important;
+    input, textarea {
+      background-color: rgba(81, 191, 205, 0.175) !important;
+      box-sizing: border-box; // ADD THIS: It forces the 100% width to include the padding
+      color: #29f804; 
+      border: 1px solid rgba($accent-neon, 0.5);
+      border-left: 2px solid rgba($accent-neon, 0.3);
+      outline: none;
+      padding: 12px 15px;
+      font-family: monospace;
+      font-size: 0.9rem;
+      margin-bottom: 5px;
+      display: block;
+      width: 100%;
+      background-image: linear-gradient(#29f804, #29f804);
+      background-size: 33.33% 2px; 
+      background-repeat: no-repeat;
+      background-position: bottom left;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+      &::placeholder {
+        color: rgba($text-primary, 0.5);
+        letter-spacing: 0.1em;
+      }
+
+      &:focus {
+        border-left-color: $accent-neon;
+        background-color: rgba(255, 255, 255, 0.05) !important;
+      }
+
+      &.heavy-load {
+        color: #f8e704 !important;
+        border-left-color: #f8e704 !important;
+        background-image: linear-gradient(#f8e704, #f8e704) !important;
+        background-size: 100% 2px !important; 
+        text-shadow: 0 0 10px rgba(248, 231, 4, 0.5);
+      }
     }
 
-    // 4. THE SHIFT (YELLOW)
-    &.heavy-load {
-      color: #f8e704 !important;
-      border-left-color: #f8e704 !important;
-      background-image: linear-gradient(#f8e704, #f8e704) !important;
-      background-size: 100% 2px !important; 
-      text-shadow: 0 0 10px rgba(248, 231, 4, 0.5);
-    }
-}
-  button {
-    align-self: flex-end;
-    background: transparent;
-    border: 1px solid $accent-neon;
-    color: $accent-neon;
-    padding: 10px 30px;
-    font-family: $font-main;
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    cursor: pointer;
-    position: relative;
-    min-width: 120px;
-    clip-path: polygon(0% 0%, 55% 0%, 100% 10%, 100% 100%, 27% 100%, 0% 70%);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    button {
+      align-self: flex-end;
+      background: transparent;
+      border: 1px solid $accent-neon;
+      color: $accent-neon;
+      padding: 4px 30px;
+      font-family: $font-main;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      cursor: pointer;
+      position: relative;
+      min-width: 100px;
+      clip-path: polygon(0% 0%, 65% 0%, 100% 30%, 100% 100%, 30% 100%, 0% 70%);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
-    &:hover {
-      clip-path: polygon(25% 0%, 100% 0%, 100% 75%, 65% 100%, 0% 100%, 0% 25%);
-      background: rgba(242, 9, 9, 0.1); 
-      color: transparent;              
-      border-color: #29f804;           
-      box-shadow: 0 0 20px rgba(41, 248, 4, 0.4); 
+      &:hover {
+        clip-path: polygon(25% 0%, 100% 0%, 100% 75%, 75% 100%, 0% 100%, 0% 25%);
+        background: rgba(29, 1, 1, 0.1); 
+        color: transparent;              
+        border-color: #f8f404;           
+        box-shadow: 0 0 20px rgba(41, 248, 4, 0.4); 
 
-      &::before {
-        content: "FIRE";
-        position: absolute;
-        left: 0;
-        right: 0;
-        color: #29f804;
-        text-align: center;
-        top: 50%;
-        transform: translateY(-50%);
-        letter-spacing: 0.4em; 
+        &::before {
+          content: "FIRE";
+          position: absolute;
+          left: 0; right: 0;
+          color: #fb2f40;
+          text-align: center;
+          top: 50%;
+          transform: translateY(-50%);
+          letter-spacing: 0.4em; 
+        }
       }
     }
   }
 
-  
-  } // End architect-input
-
   .instance-node {
     width: 100%;
-    background: rgba(12, 17, 15, 0.95); 
+    background: rgba(12, 17, 15, 0.98); // High opacity to block scanlines
     border-left: 2px solid $accent-neon;
     padding: 30px;
+    padding-bottom: 60px; // FIX 3: Space for button
     margin-bottom: 2rem;
     transition: all 0.3s ease;
     box-shadow: 0 20px 30px rgba(1, 24, 5, 0.51);
@@ -259,27 +239,26 @@ font-size: 3rem;
       opacity: 0.8;
       color: $accent-neon;
 
-      // ADD THIS NESTED BLOCK HERE
-    .terminate-btn {
-      position: absolute;
-      bottom: 15px;
-      right: 15px;
-      background: transparent;
-      border: 1px solid rgba(255, 0, 0, 0.4);
-      color: #ff3333;
-      font-family: 'monospace';
-      font-size: 0.7rem;
-      padding: 2px 8px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      z-index: 10; // Keep it above the background
+      .terminate-btn {
+        position: absolute;
+        bottom: 15px;
+        right: 15px;
+        background: transparent;
+        border: 1px solid rgba(255, 0, 0, 0.4);
+        color: #ff3333;
+        font-family: 'monospace';
+        font-size: 0.7rem;
+        padding: 2px 8px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        z-index: 10; 
 
-      &:hover {
-        background: #ff3333;
-        color: #000;
-        box-shadow: 0 0 10px #ff3333;
+        &:hover {
+          background: #ff3333;
+          color: #000;
+          box-shadow: 0 0 10px #ff3333;
+        }
       }
-    }
 
       .status-tag {
         border: 1px solid $accent-neon;
@@ -287,23 +266,13 @@ font-size: 3rem;
       }
     }
 
-    h3 {
-      margin: 0 0 10px 0;
-      text-transform: uppercase;
-    }
-
-    p {
-      margin: 0;
-      opacity: 0.8;
-      font-weight: 400;
-      line-height: 1.6;
-    }
+    h3 { margin: 0 0 10px 0; text-transform: uppercase; }
+    p { margin: 0; opacity: 0.8; font-weight: 400; line-height: 1.6; }
 
     &::after {
       content: "";
       position: absolute;
-      bottom: 0;
-      left: 0;
+      bottom: 0; left: 0;
       width: 33.33%; 
       height: 2px;
       background-color: $accent-neon;
@@ -312,21 +281,39 @@ font-size: 3rem;
     &:hover {
       background: rgb(18, 27, 31);
       transform: translateX(4px);
-
       &::after {
         width: 45%; 
         transition: width 0.3s ease;
       }
     }
   }
-} // End app-container
+}
+
+.edit-btn {
+  position: absolute;
+  bottom: 15px;
+  right: 140px; // Offset it so it doesn't overlap the Terminate button
+  background: transparent;
+  border: 1px solid rgba($accent-white, 0.3);
+  color: $accent-white;
+  font-family: 'monospace';
+  font-size: 0.7rem;
+  padding: 2px 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background: rgba($accent-white, 0.1);
+    border-color: $accent-white;
+    box-shadow: 0 0 10px rgba($accent-white, 0.2);
+  }
+}
 
 // 5. Fixed Signature
 .architect-signature {
   position: fixed;
   bottom: 20px;
-  left: 0;
-  right: 0;
+  left: 0; right: 0;
   text-align: center;
   font-size: 0.65rem;
   letter-spacing: 0.2em;
@@ -350,4 +337,3 @@ font-size: 3rem;
   letter-spacing: 0.1em;
   opacity: 0.6;
 }
-

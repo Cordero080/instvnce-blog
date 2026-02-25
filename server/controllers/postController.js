@@ -1,4 +1,4 @@
-const Post = require('../models/Post');
+const Post = require("../models/Post");
 
 // LOGIC: GET ALL POSTS
 const getAllPosts = async (req, res) => {
@@ -15,7 +15,7 @@ const createPost = async (req, res) => {
   const post = new Post({
     title: req.body.title,
     content: req.body.content,
-    author: req.body.author
+    author: req.body.author,
   });
   try {
     const newPost = await post.save();
@@ -25,11 +25,33 @@ const createPost = async (req, res) => {
   }
 };
 
+// LOGIC: UPDATE POST (Optional, not currently used in routes)
+const updatePost = async (req, res) => {
+  try {
+    const updated = await Post.findByIdAndUpdate(
+      req.params.id,
+      {
+        title: req.body.title,
+        content: req.body.content,
+        author: req.body.author,
+      },
+      { new: true }, // This returns the modified document rather than the old one
+    );
+
+    if (!updated)
+      return res.status(404).json({ message: "Instance not found" });
+    res.status(200).json(updated);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
 // LOGIC: TERMINATE POST
 const deletePost = async (req, res) => {
   try {
     const deletedPost = await Post.findByIdAndDelete(req.params.id);
-    if (!deletedPost) return res.status(404).json({ message: "Instance not found" });
+    if (!deletedPost)
+      return res.status(404).json({ message: "Instance not found" });
     res.status(200).json({ message: "Instance terminated" });
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -40,5 +62,6 @@ const deletePost = async (req, res) => {
 module.exports = {
   getAllPosts,
   createPost,
-  deletePost
+  deletePost,
+  updatePost,
 };

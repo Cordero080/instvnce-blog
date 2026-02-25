@@ -9,6 +9,8 @@ router.get('/', postController.getAllPosts);
 // 2. CREATE POST: Logic moved to postController.createPost
 router.post('/', postController.createPost);
 
+// Define the PUT path and map it to the updatePost controller
+router.put('/:id', postController.updatePost);
 // 3. TERMINATE POST: Logic moved to postController.deletePost
 router.delete('/:id', postController.deletePost);
 

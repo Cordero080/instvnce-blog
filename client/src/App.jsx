@@ -6,8 +6,9 @@ import instanceLogo from './assets/instance.svg';
 function App() { 
   const [posts, setPosts] = useState([]); 
   const [formData, setFormData] = useState({ title: '', content: '' });
-  // This state tracks if the user is currently typing
   const [isTyping, setIsTyping] = useState(false);
+  // FIX 1: Ensure the "d" is lowercase to match your code below
+  const [editingId, setEditingId] = useState(null); 
 
   const fetchPosts = async () => {
     try {
@@ -22,29 +23,43 @@ function App() {
     fetchPosts();
   }, []);
 
+  // FIX 2: Single, unified handleSubmit for both NEW and EDIT
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:8000/api/posts', formData);
+      if (editingId) {
+        // Logic for UPDATE
+        await axios.put(`http://localhost:8000/api/posts/${editingId}`, formData);
+      } else {
+        // Logic for CREATE
+        await axios.post('http://localhost:8000/api/posts', formData);
+      }
+      
       setFormData({ title: '', content: '' });
-      setIsTyping(false); // Reset typing state after submission
+      setEditingId(null); // Exit edit mode
+      setIsTyping(false); 
       fetchPosts(); 
     } catch (err) {
-      console.error("Error posting data:", err);
+      console.error("Transmission error:", err);
     }
   };
 
-  const  deletePost = async (id) => {
-    try{
-      // Send the delete request to the specific post ID
+  const startEdit = (post) => {
+    setEditingId(post._id);
+    setFormData({ title: post.title, content: post.content });
+    setIsTyping(true);
+  };
+
+  const deletePost = async (id) => {
+    try {
       await axios.delete(`http://localhost:8000/api/posts/${id}`);
-      // Refresh the UI by fetching the remaining instances
       fetchPosts();
     } catch (err) {
       console.error("Termination error:", err)
     }
   };
-const instanceCount = posts.length;
+
+  const instanceCount = posts.length;
   return (
     <>
       {/* The overlay now uses a dynamic class that checks the 'isTyping' state */}
@@ -75,6 +90,7 @@ const instanceCount = posts.length;
           onBlur={() => setIsTyping(false)} 
         >
           <input 
+          className={editingId ? 'heavy-load' : ''} // This triggers the yellow shift
           style={{ filter: `hue-rotate(${formData.title.length * 4}deg)` }}
             placeholder="INSTANCE..." 
             value={formData.title}
@@ -93,6 +109,7 @@ const instanceCount = posts.length;
           <div key={post._id} className="instance-node">
             <div className="node-meta">
               <span className="status-tag">ACTIVE_LOG</span>
+              <button className="edit-btn" onClick={() => startEdit(post)}>[EDIT]</button>
               {/* THE TERMINATE BUTTON */}
       <button 
         className="terminate-btn" 
