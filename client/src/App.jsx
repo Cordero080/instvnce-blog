@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'; // Import React hooks
 import axios from 'axios';  // Import axios to talk to the backend
 import './App.scss'; // Ensure this matches the filename
+import instanceLogo from './assets/instance.svg';
 
 function App() { 
   const [posts, setPosts] = useState([]); 
@@ -44,7 +45,9 @@ const instanceCount = posts.length;
   <span>INSTANCES_DEPLOYED: {instanceCount}</span>
   <span>LOG_LEVEL: ARCHITECT</span>
 </div>
-        <h1>INSTVNCE_BLOG</h1>
+        <div className="title-container">
+  <img src={instanceLogo} alt="INSTANCE_BLOG" className="architect-logo" />
+</div>
 
         <form 
           className={`architect-input ${isTyping ? 'focused-mode' : ''}`}
@@ -56,13 +59,13 @@ const instanceCount = posts.length;
         >
           <input 
           style={{ filter: `hue-rotate(${formData.title.length * 4}deg)` }}
-            placeholder="INSTANCE_TITLE" 
+            placeholder="INSTANCE..." 
             value={formData.title}
             onChange={(e) => setFormData({...formData, title: e.target.value})}
           />
           <textarea 
             style={{ filter: `hue-rotate(${formData.content.length * 1}deg)` }}
-            placeholder="DATA_INPUT..." 
+            placeholder="DATA..." 
             value={formData.content}
             onChange={(e) => setFormData({...formData, content: e.target.value})}
           />
@@ -82,7 +85,7 @@ const instanceCount = posts.length;
       </div>
 
       <footer className="architect-signature">
-        INSTVNCE_BLOG // ARCHITECT: PVBLO // "The map is not the territory."
+        INSTVNCE_BL0G // ARCHITECT: PVBLO // "The map is not the territory."
       </footer>
     </>
   );

@@ -74,6 +74,27 @@ html, body, #root {
     }
   }
 
+  .title-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  margin-bottom: 3rem;
+}
+
+.architect-logo {
+  // Use a large percentage or a fixed pixel width
+  width: 90%; 
+  max-width: 900px; // This ensures it doesn't get TOO big on huge monitors
+  height: auto;
+  display: block;
+
+  // Keeping the visibility filters we established
+  filter: brightness(0) invert(1) drop-shadow(0 0 12px rgba(19, 88, 2, 0.795));
+  
+  transition: all 0.4s ease;
+}
+
   .architect-input {
   position: relative; 
   z-index: 20; 
