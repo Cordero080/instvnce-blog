@@ -33,6 +33,17 @@ function App() {
       console.error("Error posting data:", err);
     }
   };
+
+  const  deletePost = async (id) => {
+    try{
+      // Send the delete request to the specific post ID
+      await axios.delete(`http://localhost:8000/api/posts/${id}`);
+      // Refresh the UI by fetching the remaining instances
+      fetchPosts();
+    } catch (err) {
+      console.error("Termination error:", err)
+    }
+  };
 const instanceCount = posts.length;
   return (
     <>
@@ -46,8 +57,14 @@ const instanceCount = posts.length;
   <span>LOG_LEVEL: ARCHITECT</span>
 </div>
         <div className="title-container">
-  <img src={instanceLogo} alt="INSTANCE_BLOG" className="architect-logo" />
+  <h1 className="architect-title">
+    <span className="bracket">[</span>
+    INSTVNCE_BLOG
+    <span className="bracket">]</span>
+  </h1>
 </div>
+{/* NEW DIVIDER HERE */}
+<div className="title-divider" />
 
         <form 
           className={`architect-input ${isTyping ? 'focused-mode' : ''}`}
@@ -76,6 +93,13 @@ const instanceCount = posts.length;
           <div key={post._id} className="instance-node">
             <div className="node-meta">
               <span className="status-tag">ACTIVE_LOG</span>
+              {/* THE TERMINATE BUTTON */}
+      <button 
+        className="terminate-btn" 
+        onClick={() => deletePost(post._id)}
+      >
+        [TERMINATE]
+      </button>
               <span className="timestamp">{new Date(post.createdAt).toLocaleTimeString()}</span>
             </div>
             <h3>{post.title}</h3>

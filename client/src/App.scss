@@ -6,6 +6,7 @@ $accent-warning: #f8e704; // New "High Energy" Yellow
 $bg-black: #080808; 
 $text-primary: #f9fefa;
 $accent-neon: #00ff8c;
+$accent-white: #ccedde;
 $font-main: "omnium", sans-serif;
 
 // 2. The Foundation
@@ -82,17 +83,56 @@ html, body, #root {
   margin-bottom: 3rem;
 }
 
-.architect-logo {
-  // Use a large percentage or a fixed pixel width
-  width: 90%; 
-  max-width: 900px; // This ensures it doesn't get TOO big on huge monitors
-  height: auto;
-  display: block;
+.architect-title {
+  font-family: "omnium", sans-serif;
+font-weight: 700;
+font-style: normal;
+font-size: 3rem;
+  color: $accent-white; // Or #fff
+  letter-spacing: 0.15em; // THIS gives you the uniform spacing control
+  text-transform: uppercase;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  // Keeping the visibility filters we established
-  filter: brightness(0) invert(1) drop-shadow(0 0 12px rgba(19, 88, 2, 0.795));
+  // Applying your "neon soft cyber" aesthetic
+  text-shadow: 0 0 10px rgba($accent-neon, 0.2), 
+               0 0 20px rgba($accent-neon, 0.2);
   
-  transition: all 0.4s ease;
+  .bracket {
+    color: rgba($accent-neon, 0.4); // Make brackets slightly dimmer
+    margin: 0 15px; // The "buffer" space we talked about in Illustrator
+    font-weight: 300;
+  }
+}
+
+.title-divider {
+  width: 170%;
+  height: 2px;
+  font-family: deja-vu, sans-serif;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba($accent-neon, 0.8) 50%, 
+    transparent 100%);
+  margin: 2rem 0;
+  position: relative;
+  box-shadow: 0 0 15px rgba($accent-neon, 0.4);
+
+  // Small technical detail: a "bit" indicator in the center
+  &::after {
+    content: "useWisely();";
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 2px;
+    background: #000000c2;
+    padding: 0 10px;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: $accent-neon;
+  }
 }
 
   .architect-input {
@@ -219,6 +259,28 @@ html, body, #root {
       opacity: 0.8;
       color: $accent-neon;
 
+      // ADD THIS NESTED BLOCK HERE
+    .terminate-btn {
+      position: absolute;
+      bottom: 15px;
+      right: 15px;
+      background: transparent;
+      border: 1px solid rgba(255, 0, 0, 0.4);
+      color: #ff3333;
+      font-family: 'monospace';
+      font-size: 0.7rem;
+      padding: 2px 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      z-index: 10; // Keep it above the background
+
+      &:hover {
+        background: #ff3333;
+        color: #000;
+        box-shadow: 0 0 10px #ff3333;
+      }
+    }
+
       .status-tag {
         border: 1px solid $accent-neon;
         padding: 2px 5px;
@@ -288,3 +350,4 @@ html, body, #root {
   letter-spacing: 0.1em;
   opacity: 0.6;
 }
+
