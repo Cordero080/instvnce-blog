@@ -1,0 +1,357 @@
+@import url("https://use.typekit.net/naj4gbr.css");
+
+// ─── Variables (mirror App.scss) ───────────────────────────────
+$accent-neon:    #00ff8c;
+$accent-cyan:    #00d4ff;
+$accent-magenta: #dc08bc;
+$bg-black:       #080808;
+$text-primary:   #f9fefa;
+$font-main:      "omnium", sans-serif;
+
+// ─── Collapsed & Expanded heights ──────────────────────────────
+$nav-height-collapsed: 54px;
+$nav-height-expanded:  76px;
+
+
+// ═══════════════════════════════════════════════════════════════
+//  TOP NAV SHELL
+// ═══════════════════════════════════════════════════════════════
+
+.top-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: $nav-height-collapsed;
+  z-index: 1000;
+  overflow: hidden;
+
+  // — Dark holographic background (pistola + instance card style)
+  background:
+    linear-gradient(145deg, #0d0d0d, #000000),
+    radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.06), transparent 50%),
+    radial-gradient(circle at 75% 75%, rgba(0, 0, 0, 0.6),        transparent 50%),
+    linear-gradient(
+      45deg,
+      rgba(0, 255, 140, 0.03),
+      rgba(0, 212, 255, 0.04),
+      rgba(138, 43, 226, 0.03)
+    );
+  background-size:     100% 100%, 150% 150%, 150% 150%, 200% 200%;
+  background-position: 0% 50%, 75% 75%, 75% 75%, 50% 50%;
+  background-blend-mode: overlay, multiply, overlay;
+
+  // — Numen's signature curved bottom cut-out (drooping ellipse)
+  border-bottom-left-radius:  40% 55%;
+  border-bottom-right-radius: 40% 55%;
+
+  // — Pistola inset glow on the edges
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.85),
+    inset 0 -1px 2px rgba(255, 255, 255, 0.08),
+    inset 0  1px 2px rgba(0, 0, 0, 0.5);
+
+  // — Glassmorphism blur (numen TopBar)
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+
+  // — Layout: logo left | links center | status right
+  display: flex;
+  align-items: flex-start;   // pin to top so content peeks at collapse
+  justify-content: space-between;
+  padding: 0 1.6rem;
+
+  // — The expand / retract transition (pistola's cubic-bezier)
+  transition:
+    height        0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    border-radius 0.45s ease;
+
+  // — Desktop hover expand
+  @media (min-width: 769px) {
+    &:hover {
+      height: $nav-height-expanded;
+      border-bottom-left-radius:  40% 70%;
+      border-bottom-right-radius: 40% 70%;
+
+      .top-nav-links {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .status-label {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+  }
+
+  // — Mobile open state
+  &.is-open {
+    height: $nav-height-expanded;
+    border-bottom-left-radius:  40% 70%;
+    border-bottom-right-radius: 40% 70%;
+
+    .top-nav-links {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .status-label {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .top-nav-hamburger .hline:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .top-nav-hamburger .hline:nth-child(2) { opacity: 0; transform: translateX(8px); }
+    .top-nav-hamburger .hline:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  }
+}
+
+
+// ═══════════════════════════════════════════════════════════════
+//  LOGO
+// ═══════════════════════════════════════════════════════════════
+
+.top-nav-logo {
+  font-family: $font-main;
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: $text-primary;
+  white-space: nowrap;
+  padding-top: 11px;
+  line-height: 1.2;
+  text-shadow: 0 0 10px rgba($accent-neon, 0.2);
+  transition: text-shadow 0.3s ease;
+  flex: 1;
+
+  .bracket {
+    color: rgba($accent-neon, 0.4);
+    font-weight: 300;
+    margin: 0 4px;
+  }
+
+  &:hover {
+    text-shadow: 2px 0 rgba(255, 0, 234, 0.45), -2px 0 rgba(0, 247, 255, 0.45);
+  }
+}
+
+
+// ═══════════════════════════════════════════════════════════════
+//  NAV LINKS  — hidden in collapse, slide in on expand
+// ═══════════════════════════════════════════════════════════════
+
+.top-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  // Offset from top so links sit in the lower portion of the expanded bar
+  margin-top: calc($nav-height-collapsed - 4px);
+
+  // — Pistola label reveal mechanic (transposed to top nav)
+  opacity: 0;
+  transform: translateY(-8px);
+  transition:
+    opacity   0.3s ease 0.1s,
+    transform 0.3s ease 0.1s;
+}
+
+.top-nav-link {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4px 14px;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background 0.25s ease;
+
+  &:hover {
+    background: rgba($accent-neon, 0.07);
+
+    .link-label {
+      color: $accent-neon;
+      text-shadow: 0 0 10px rgba($accent-neon, 0.5);
+    }
+
+    .link-glow-line {
+      width: 70%;
+      opacity: 1;
+    }
+  }
+
+  // — Active state
+  &--active .link-label {
+    color: $accent-neon;
+  }
+
+  &--active .link-glow-line {
+    width: 50%;
+    opacity: 0.7;
+  }
+}
+
+.link-label {
+  font-family: monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  color: rgba($text-primary, 0.55);
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: color 0.25s ease, text-shadow 0.25s ease;
+}
+
+// Pistola's active glow line — adapted to bottom of each link
+.link-glow-line {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, $accent-neon, $accent-cyan);
+  border-radius: 2px;
+  opacity: 0;
+  transition: width 0.3s ease, opacity 0.3s ease;
+}
+
+
+// ═══════════════════════════════════════════════════════════════
+//  STATUS PIP  — always visible, label slides in on expand
+// ═══════════════════════════════════════════════════════════════
+
+.top-nav-status {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  padding-top: 11px;
+  align-self: flex-start;
+  flex: 1;
+}
+
+.status-pip {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: $accent-neon;
+  box-shadow: 0 0 6px $accent-neon, 0 0 12px rgba($accent-neon, 0.4);
+  animation: pipPulse 2.5s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+@keyframes pipPulse {
+  0%, 100% { opacity: 1;   box-shadow: 0 0 6px $accent-neon, 0 0 12px rgba($accent-neon, 0.4); }
+  50%       { opacity: 0.5; box-shadow: 0 0 3px $accent-neon; }
+}
+
+.status-label {
+  font-family: monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.15em;
+  color: rgba($accent-neon, 0.6);
+  text-transform: uppercase;
+  white-space: nowrap;
+
+  // Pistola label reveal — slide in from right
+  opacity: 0;
+  transform: translateX(8px);
+  transition: opacity 0.3s ease 0.12s, transform 0.3s ease 0.12s;
+}
+
+
+// ═══════════════════════════════════════════════════════════════
+//  BOTTOM GLOW EDGE  — pistola's side-nav-glow transposed to bottom
+// ═══════════════════════════════════════════════════════════════
+
+.top-nav-glow {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  pointer-events: none;
+  overflow: visible;
+
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 15%;
+    width: 70%;
+    height: 2px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba($accent-neon, 0.5)  20%,
+      rgba($accent-cyan, 0.4)  50%,
+      rgba($accent-neon, 0.5)  80%,
+      transparent
+    );
+    animation: bottomGlow 4s ease-in-out infinite;
+  }
+}
+
+@keyframes bottomGlow {
+  0%, 100% { opacity: 0.35; }
+  50%       { opacity: 0.9;  }
+}
+
+
+// ═══════════════════════════════════════════════════════════════
+//  HAMBURGER  — mobile only
+// ═══════════════════════════════════════════════════════════════
+
+.top-nav-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 20px;
+  height: 14px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  line-height: $nav-height-collapsed;
+  margin-top: calc(($nav-height-collapsed - 14px) / 2);
+  flex-shrink: 0;
+
+  .hline {
+    display: block;
+    width: 100%;
+    height: 1.5px;
+    background: linear-gradient(90deg, $accent-neon, $accent-cyan);
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    box-shadow: 0 0 6px rgba($accent-neon, 0.4);
+  }
+
+  .hline:nth-child(2) {
+    width: 65%;
+    margin-left: auto;
+  }
+
+  @media (max-width: 768px) {
+    display: flex;
+  }
+}
+
+
+// ═══════════════════════════════════════════════════════════════
+//  MOBILE ADJUSTMENTS
+// ═══════════════════════════════════════════════════════════════
+
+@media (max-width: 768px) {
+  .top-nav {
+    padding: 0 1rem;
+  }
+
+  .top-nav-links {
+    gap: 0;
+  }
+
+  .link-label {
+    font-size: 0.55rem;
+  }
+}

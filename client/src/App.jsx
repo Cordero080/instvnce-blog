@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react'; // Import React hooks
-import axios from 'axios';  // Import axios to talk to the backend
-import './App.scss'; // Ensure this matches the filename
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import './App.scss';
 import instanceLogo from './assets/instance.svg';
+import TopNav from './components/TopNav/TopNav';
 
 function App() { 
   const [posts, setPosts] = useState([]); 
@@ -62,8 +63,9 @@ function App() {
   const instanceCount = posts.length;
   return (
     <>
+      <TopNav />
       {/* The overlay now uses a dynamic class that checks the 'isTyping' state */}
-      <div className={`crt-overlay ${isTyping ? 'fade' : ''}`} /> 
+      <div className={`crt-overlay ${isTyping ? 'fade' : ''}`} />
 
       <div className="app-container">
         <div className="system-diagnostics">
