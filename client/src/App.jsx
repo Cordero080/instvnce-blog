@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import './App.scss';
 import instanceLogo from './assets/instance.svg';
+import logoOne from './assets/logo-one.svg';
 import TopNav from './components/TopNav/TopNav';
 
 function App() { 
@@ -74,6 +75,7 @@ function App() {
   <span>LOG_LEVEL: ARCHITECT</span>
 </div>
         <div className="title-container">
+          <img src={logoOne} alt="INSTVNCE logo" className="brand-logo" />
   <h1 className="architect-title">
     <span className="bracket">[</span>
     INSTVNCE_BLOG
