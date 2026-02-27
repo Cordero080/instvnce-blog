@@ -12,6 +12,7 @@
   .input-frame {
     position: relative;
     width: 100%;
+    align-self: stretch; // ensure full width in align-items: center flex column
 
     &::before,
     &::after {
@@ -22,8 +23,8 @@
       font-size: 8rem;
       font-weight: 100;
       line-height: 1;
-      color: rgba($accent-neon, 0.07);
-      text-shadow: 0 0 10px rgba($accent-neon, 0.04);
+      color: rgba($accent-neon, 0.12);
+      text-shadow: 0 0 10px rgba($accent-neon, 0.06);
       pointer-events: none;
       user-select: none;
       transition: color 0.4s ease, text-shadow 0.4s ease;
@@ -35,8 +36,8 @@
     // Braces brighten when the form is being used
     &:focus-within {
       &::before, &::after {
-        color: rgba($accent-neon, 0.14);
-        text-shadow: 0 0 40px rgba($accent-neon, 0.08);
+        color: rgba($accent-neon, 0.22);
+        text-shadow: 0 0 40px rgba($accent-neon, 0.12);
       }
     }
   }
@@ -99,6 +100,7 @@
       display: block;
       width: 100%;
       resize: vertical;
+      overflow-y: auto;
       background-image: linear-gradient(#29f804, #29f804);
       background-size: 33.33% 2px;
       background-repeat: no-repeat;

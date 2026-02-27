@@ -11,6 +11,10 @@
 
 ---
 
+![INSTVNCE_BLOG](.github/assets/instance-home.png)
+
+---
+
 # INSTVNCE_BLOG
 
 A raw developer's log. Not a polished publication — an active terminal window into how I think, build, and decide.
@@ -21,7 +25,9 @@ A raw developer's log. Not a polished publication — an active terminal window 
 
 INSTVNCE is a **personal technical blog** built around one idea: every post is an instance — a deployed unit of thought. You write it, you fire it, you can terminate it. The interface reflects that.
 
-The aesthetic is cyberpunk terminal: CRT scanline overlays, holographic post cards with chamfered corners, neon green on cosmic black, monospace everywhere. It's not decoration — it's a philosophy. The medium should feel like the work.
+The aesthetic is neopunk terminal: CRT scanline overlays, holographic post cards with chamfered corners, neon green on cosmic black, monospace everywhere. It's not decoration — it's a philosophy. The medium should feel like the work.
+
+![Nav expanded](.github/assets/instance-nav.png)
 
 ---
 
@@ -34,6 +40,8 @@ Most dev blogs look like Medium. This one looks like a monitoring dashboard.
 - **Honest format** — no SEO filler, no "in this post I will". Just the thought, the decision, the thing learned.
 - **Full control** — self-hosted, no CMS, no platform risk. You own every instance.
 
+![Architect input](.github/assets/instance-input.png)
+
 ---
 
 ## Stack
@@ -45,6 +53,8 @@ Most dev blogs look like Medium. This one looks like a monitoring dashboard.
 | Backend | Node / Express |
 | Database | MongoDB |
 | Font | Omnium (Adobe Fonts) |
+
+![Deployed instance](.github/assets/instance-post.png)
 
 ---
 

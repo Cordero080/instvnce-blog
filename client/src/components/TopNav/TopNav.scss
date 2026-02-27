@@ -238,9 +238,10 @@ $nav-height-expanded:  76px;
   text-transform: uppercase;
   white-space: nowrap;
 
-  // Pistola label reveal — slide in from right
+  // Pistola label reveal — slides in from the left so it never overflows
+  // the nav's right overflow:hidden boundary
   opacity: 0;
-  transform: translateX(8px);
+  transform: translateX(-6px);
   transition: opacity 0.3s ease 0.12s, transform 0.3s ease 0.12s;
 }
 

@@ -1,5 +1,48 @@
 // ─── Foundation ──────────────────────────────────────────────────────────────
-// Global reset and root element defaults.
+// Global reset, root element defaults, and custom scrollbar.
+// Scrollbar pattern adapted from pneuma-src: 4px width, gradient fade thumb.
+
+// Webkit (Chrome, Safari, Edge)
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    180deg,
+    rgba($accent-neon, 0)   0%,
+    rgba($accent-neon, 0.5) 15%,
+    rgba($accent-neon, 0.8) 50%,
+    rgba($accent-neon, 0.5) 85%,
+    rgba($accent-neon, 0)   100%
+  );
+  border-radius: 0; // sharp edge — matches card aesthetic
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    180deg,
+    rgba($accent-neon, 0)   0%,
+    rgba($accent-neon, 0.7) 15%,
+    rgba($accent-neon, 1)   50%,
+    rgba($accent-neon, 0.7) 85%,
+    rgba($accent-neon, 0)   100%
+  );
+}
+
+// Firefox — only when webkit pseudo-elements are unsupported (i.e. not Chrome/Safari/Edge)
+// Chrome now supports scrollbar-color and if both are set it wins over ::-webkit-scrollbar,
+// which would replace the gradient with a flat color. This @supports guard prevents that.
+@supports not selector(::-webkit-scrollbar) {
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgba($accent-neon, 0.4) transparent;
+  }
+}
 
 html, body, #root {
   background-color: $bg-black;
@@ -13,5 +56,9 @@ html, body, #root {
   font-family: $font-main;
   font-weight: 700;
   -webkit-font-smoothing: antialiased;
+}
+
+// overflow-x on body only — setting it on html can suppress the page scrollbar
+body {
   overflow-x: hidden;
 }
