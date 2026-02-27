@@ -1,0 +1,25 @@
+// ─── CRT Scanline Overlay ────────────────────────────────────────────────────
+// Fixed full-screen effect layered behind all content (z-index: 5).
+// Fades out when .fade class is applied (triggered while typing).
+
+.crt-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 5;
+  pointer-events: none;
+  background: linear-gradient(
+    rgba(242, 9, 9, 0.968) 50%,
+    rgba(1, 1, 88, 0.526) 50%
+  ),
+  linear-gradient(
+    90deg,
+    rgba(255, 0, 0, 0.04),
+    rgba(0, 255, 0, 0.02),
+    rgba(0, 0, 255, 0.04)
+  );
+  background-size: 100% 4px, 4px 100%;
+  opacity: 0.6;
+}

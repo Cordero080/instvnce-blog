@@ -1,0 +1,158 @@
+// ─── Title Block ─────────────────────────────────────────────────────────────
+// Logo, page title, bracket treatment, and divider.
+
+.app-container {
+
+  // Legacy h1 (kept for safety)
+  h1 {
+    text-shadow: 0 0 10px rgba($text-primary, 0.2);
+    letter-spacing: 0.1em;
+    font-size: 3.5rem;
+    text-transform: uppercase;
+    margin-bottom: 4rem;
+    color: $text-primary;
+
+    &:hover {
+      color: $accent-neon;
+      text-shadow: 2px 0 rgba(255, 0, 234, 0.5), -2px 0 rgba(0, 247, 255, 0.5);
+    }
+  }
+
+  .title-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: .2rem;
+    margin-bottom: 2rem;
+  }
+
+  // SVG logo — forced black fill + neon ghost glow
+  .brand-logo {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    margin-bottom: 1.5rem;
+    filter: brightness(0) drop-shadow(0 0 5px rgba($accent-neon, 0.65)) drop-shadow(0 0 10px rgba($accent-neon, 0.15));
+    transition: filter 0.4s ease;
+
+    &:hover {
+      filter: brightness(0) drop-shadow(0 0 20px rgba($accent-neon, 0.6)) drop-shadow(0 0 50px rgba($accent-neon, 0.25));
+    }
+  }
+
+  // [ INSTVNCE_BLOG ] heading with character-level treatments
+  .architect-title {
+    font-family: "omnium", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 3rem;
+    color: $accent-white;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-shadow: 0 0 10px rgba($accent-neon, 0.2), 0 0 20px rgba($accent-neon, 0.2);
+
+    .bracket {
+      color: rgba($accent-neon, 0.4);
+      margin: 0 15px;
+      font-weight: 300;
+    }
+
+    // Hollow outlined V
+    .title-v {
+      color: transparent;
+      -webkit-text-stroke: 1.5px $accent-white;
+    }
+
+    // White underscore with black outline (text-shadow gives visible exterior stroke)
+    .title-underscore {
+      color: $accent-white;
+      -webkit-text-stroke: 0;
+      text-shadow:
+        -1px -1px 0 #000,
+         1px -1px 0 #000,
+        -1px  1px 0 #000,
+         1px  1px 0 #000;
+    }
+  }
+
+  // Full-bleed neon divider with "useWisely();" label
+  .title-divider {
+    width: 170%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent 0%, rgba($accent-neon, 0.8) 50%, transparent 100%);
+    margin: 2rem 0;
+    position: relative;
+    box-shadow: 0 0 15px rgba($accent-neon, 0.4);
+
+    &::after {
+      content: "useWisely();";
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 2px;
+      background: #000000c2;
+      padding: 0 10px;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      color: $accent-neon;
+      cursor: default;
+      transition: color 0.3s ease;
+    }
+
+    // Hypnotic warp on hover — stretches, skews, and color-shifts in a loop
+    &:hover::after {
+      animation: hypnoticWarp 2s ease-in-out infinite;
+    }
+  }
+}
+
+@keyframes hypnoticWarp {
+  0% {
+    transform: translateX(-50%) scaleX(1)    scaleY(1)    skewX(0deg);
+    letter-spacing: 0.2em;
+    color: $accent-neon;
+    text-shadow: none;
+  }
+  16% {
+    transform: translateX(-50%) scaleX(1.55) scaleY(0.65) skewX(-14deg);
+    letter-spacing: 0.55em;
+    color: rgba(255, 0, 234, 0.95);
+    text-shadow: 0 0 10px rgba(255, 0, 234, 0.7);
+  }
+  33% {
+    transform: translateX(-50%) scaleX(0.6)  scaleY(1.5)  skewX(11deg);
+    letter-spacing: 0.03em;
+    color: rgba(0, 247, 255, 0.95);
+    text-shadow: 0 0 10px rgba(0, 247, 255, 0.7);
+  }
+  50% {
+    transform: translateX(-50%) scaleX(1.35) scaleY(0.75) skewX(-8deg);
+    letter-spacing: 0.45em;
+    color: $accent-neon;
+    text-shadow: 0 0 14px rgba($accent-neon, 0.9);
+  }
+  66% {
+    transform: translateX(-50%) scaleX(0.75) scaleY(1.3)  skewX(8deg);
+    letter-spacing: 0.08em;
+    color: rgba(255, 0, 234, 0.85);
+    text-shadow: 0 0 8px rgba(255, 0, 234, 0.6);
+  }
+  83% {
+    transform: translateX(-50%) scaleX(1.2)  scaleY(0.85) skewX(-5deg);
+    letter-spacing: 0.32em;
+    color: rgba(0, 247, 255, 0.9);
+    text-shadow: 0 0 8px rgba(0, 247, 255, 0.6);
+  }
+  100% {
+    transform: translateX(-50%) scaleX(1)    scaleY(1)    skewX(0deg);
+    letter-spacing: 0.2em;
+    color: $accent-neon;
+    text-shadow: none;
+  }
+}

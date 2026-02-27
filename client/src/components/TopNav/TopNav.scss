@@ -66,26 +66,7 @@ $nav-height-expanded:  76px;
     height        0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
     border-radius 0.45s ease;
 
-  // — Desktop hover expand
-  @media (min-width: 769px) {
-    &:hover {
-      height: $nav-height-expanded;
-      border-bottom-left-radius:  40% 70%;
-      border-bottom-right-radius: 40% 70%;
-
-      .top-nav-links {
-        opacity: 1;
-        transform: translateY(0);
-      }
-
-      .status-label {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-  }
-
-  // — Mobile open state
+  // — Open state — driven by JS (onMouseEnter/Leave desktop, hamburger mobile)
   &.is-open {
     height: $nav-height-expanded;
     border-bottom-left-radius:  40% 70%;
@@ -93,11 +74,12 @@ $nav-height-expanded:  76px;
 
     .top-nav-links {
       opacity: 1;
-      transform: translateY(0);
+      transform: translateX(-50%) translateY(0);
     }
 
     .status-label {
       opacity: 1;
+      margin-right: 40px;
       transform: translateX(0);
     }
 
@@ -146,12 +128,14 @@ $nav-height-expanded:  76px;
   display: flex;
   align-items: center;
   gap: 0.25rem;
-  // Offset from top so links sit in the lower portion of the expanded bar
-  margin-top: calc($nav-height-collapsed - 4px);
+  // Pinned to the bottom of the nav, centered — works at any expanded height
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-8px);
 
   // — Pistola label reveal mechanic (transposed to top nav)
   opacity: 0;
-  transform: translateY(-8px);
   transition:
     opacity   0.3s ease 0.1s,
     transform 0.3s ease 0.1s;
@@ -345,6 +329,10 @@ $nav-height-expanded:  76px;
 @media (max-width: 768px) {
   .top-nav {
     padding: 0 1rem;
+
+    &.is-open {
+      height: 96px;
+    }
   }
 
   .top-nav-links {

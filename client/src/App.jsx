@@ -78,36 +78,40 @@ function App() {
           <img src={logoOne} alt="INSTVNCE logo" className="brand-logo" />
   <h1 className="architect-title">
     <span className="bracket">[</span>
-    INSTVNCE_BLOG
+    INST<span className="title-v">V</span>NCE<span className="title-underscore">_</span>BLOG
     <span className="bracket">]</span>
   </h1>
 </div>
 {/* NEW DIVIDER HERE */}
 <div className="title-divider" />
 
-        <form 
-          className={`architect-input ${isTyping ? 'focused-mode' : ''}`}
-          onSubmit={handleSubmit}
-          // When the form is clicked, scanlines will fade
-          onFocus={() => setIsTyping(true)} 
-          // When the user clicks away, scanlines return
-          onBlur={() => setIsTyping(false)} 
-        >
-          <input 
-          className={editingId ? 'heavy-load' : ''} // This triggers the yellow shift
-          style={{ filter: `hue-rotate(${formData.title.length * 4}deg)` }}
-            placeholder="INSTANCE..." 
-            value={formData.title}
-            onChange={(e) => setFormData({...formData, title: e.target.value})}
-          />
-          <textarea 
-            style={{ filter: `hue-rotate(${formData.content.length * 1}deg)` }}
-            placeholder="DATA..." 
-            value={formData.content}
-            onChange={(e) => setFormData({...formData, content: e.target.value})}
-          />
-          <button type="submit">AIM</button>
-        </form>
+        <div className="input-frame">
+          <form
+            className={`architect-input ${isTyping ? 'focused-mode' : ''}`}
+            onSubmit={handleSubmit}
+            onFocus={() => setIsTyping(true)}
+            onBlur={() => setIsTyping(false)}
+          >
+            <input
+              className={editingId ? 'heavy-load' : ''}
+              style={{ filter: `hue-rotate(${formData.title.length * 4}deg)` }}
+              placeholder="INSTANCE..."
+              value={formData.title}
+              onChange={(e) => setFormData({...formData, title: e.target.value})}
+            />
+            <textarea
+              style={{ filter: `hue-rotate(${formData.content.length * 1}deg)` }}
+              placeholder="DATA..."
+              value={formData.content}
+              onChange={(e) => setFormData({...formData, content: e.target.value})}
+            />
+            <button type="submit">AIM</button>
+          </form>
+        </div>
+
+        <div className="feed-separator">
+          <span>// DEPLOYED INSTANCES</span>
+        </div>
 
         {posts.map(post => ( 
           <div key={post._id} className="instance-node">

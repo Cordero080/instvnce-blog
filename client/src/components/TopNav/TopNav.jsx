@@ -5,7 +5,11 @@ function TopNav() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className={`top-nav ${isOpen ? 'is-open' : ''}`}>
+    <nav
+      className={`top-nav ${isOpen ? 'is-open' : ''}`}
+      onMouseEnter={() => setIsOpen(true)}
+      onMouseLeave={() => setIsOpen(false)}
+    >
 
       {/* Logo — always visible */}
       <div className="top-nav-logo">

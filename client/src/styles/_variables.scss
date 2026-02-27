@@ -1,0 +1,10 @@
+// ─── Design Tokens ───────────────────────────────────────────────────────────
+// Colors, fonts, and other shared values.
+// Every other partial imports these automatically via App.scss load order.
+
+$accent-warning: #f8e704;
+$bg-black:       #080808;
+$text-primary:   #f9fefa;
+$accent-neon:    #00ff6ac7;
+$accent-white:   #eefdf6f4;
+$font-main:      "omnium", sans-serif;

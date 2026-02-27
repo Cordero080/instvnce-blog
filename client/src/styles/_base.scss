@@ -1,0 +1,17 @@
+// ─── Foundation ──────────────────────────────────────────────────────────────
+// Global reset and root element defaults.
+
+html, body, #root {
+  background-color: $bg-black;
+  color: $text-primary;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  font-family: $font-main;
+  font-weight: 700;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
