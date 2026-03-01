@@ -1,15 +1,17 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import ReactMarkdown from 'react-markdown';
 import rehypeHighlight from 'rehype-highlight';
 import logoOne from '../assets/logo-one.svg';
+import Braces3D from '../components/Braces3D/Braces3D';
 
 export default function Feed({ isSyntaxOpen }) {
   const [posts, setPosts] = useState([]);
   const [formData, setFormData] = useState({ title: '', content: '' });
   const [isTyping, setIsTyping] = useState(false);
   const [editingId, setEditingId] = useState(null);
+  const textareaRef = useRef(null);
   const navigate = useNavigate();
 
   const fetchPosts = async () => {
@@ -22,6 +24,13 @@ export default function Feed({ isSyntaxOpen }) {
   };
 
   useEffect(() => { fetchPosts(); }, []);
+
+  useEffect(() => {
+    if (textareaRef.current) {
+      textareaRef.current.style.height = 'auto';
+      textareaRef.current.style.height = textareaRef.current.scrollHeight + 'px';
+    }
+  }, [formData.content]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -80,6 +89,7 @@ export default function Feed({ isSyntaxOpen }) {
         <div className="title-divider" />
 
         <div className="input-frame">
+          <Braces3D />
           <form
             className={`architect-input ${isTyping ? 'focused-mode' : ''}`}
             onSubmit={handleSubmit}
@@ -94,6 +104,7 @@ export default function Feed({ isSyntaxOpen }) {
               onChange={(e) => setFormData({ ...formData, title: e.target.value })}
             />
             <textarea
+              ref={textareaRef}
               style={{ filter: `hue-rotate(${formData.content.length * 1}deg)` }}
               placeholder="DATA..."
               value={formData.content}

@@ -12,7 +12,8 @@
   .input-frame {
     position: relative;
     width: 100%;
-    align-self: stretch; // ensure full width in align-items: center flex column
+    align-self: stretch;
+    overflow: visible; // ensure full width in align-items: center flex column
 
     &::before,
     &::after {
@@ -30,8 +31,10 @@
       transition: color 0.4s ease, text-shadow 0.4s ease;
     }
 
-    &::before { content: '{'; right: calc(100% + 20px); }
-    &::after  { content: '}'; left:  calc(100% + 20px); }
+    // CSS braces suppressed — replaced by Braces3D (Three.js) on desktop.
+    // No mobile fallback: braces need side gutter space that doesn't exist on small screens.
+    &::before { content: none; }
+    &::after  { content: none; }
 
     // Braces brighten when the form is being used
     &:focus-within {

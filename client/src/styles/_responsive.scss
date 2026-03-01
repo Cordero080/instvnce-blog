@@ -2,14 +2,6 @@
 // Three tiers: tablet (≤768), mobile (≤480), extra-small (≤360).
 // Each tier only overrides what actually needs to change at that size.
 
-// Hide gutter braces when there's no side space for them
-@media (max-width: 900px) {
-  .input-frame::before,
-  .input-frame::after {
-    display: none;
-  }
-}
-
 // Tablet (≤ 768px)
 @media (max-width: 768px) {
   .app-container {
