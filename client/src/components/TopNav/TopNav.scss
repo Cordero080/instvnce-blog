@@ -186,6 +186,28 @@ $nav-height-expanded:  76px;
   transition: color 0.25s ease, text-shadow 0.25s ease;
 }
 
+// Syntax help button — styled as a nav link but rendered as a button
+.top-nav-link--syntax {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 14px;
+
+  .link-label {
+    color: rgba($accent-cyan, 0.55);
+    transition: color 0.25s ease, text-shadow 0.25s ease;
+  }
+
+  &:hover .link-label {
+    color: $accent-cyan;
+    text-shadow: 0 0 10px rgba($accent-cyan, 0.5);
+  }
+
+  .link-glow-line {
+    background: linear-gradient(90deg, $accent-cyan, $accent-neon);
+  }
+}
+
 // Pistola's active glow line — adapted to bottom of each link
 .link-glow-line {
   position: absolute;

@@ -8,6 +8,7 @@
 //   _title      → logo, page title, bracket treatment, divider
 //   _input      → architect-input form (AIM button, heavy-load state)
 //   _post-card  → instance-node holographic cards, edit/terminate buttons
+//   _highlight  → syntax highlight theme (overrides highlight.js for terminal palette)
 //   _responsive → all @media breakpoints (tablet / mobile / xs)
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -20,4 +21,5 @@
 @import 'styles/title';
 @import 'styles/input';
 @import 'styles/post-card';
+@import 'styles/highlight';
 @import 'styles/responsive';

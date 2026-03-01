@@ -3,8 +3,11 @@ const router = express.Router();
 // This line connects the 'brain' (controller) to the 'path' (route)
 const postController = require('../controllers/postController');
 
-// 1. GET ALL POSTS: Logic moved to postController.getAllPosts
+// 1. GET ALL POSTS
 router.get('/', postController.getAllPosts);
+
+// 2. GET SINGLE POST BY ID
+router.get('/:id', postController.getPostById);
 
 // 2. CREATE POST: Logic moved to postController.createPost
 router.post('/', postController.createPost);

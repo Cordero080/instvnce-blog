@@ -1,0 +1,43 @@
+// ─── Syntax Highlight Theme ───────────────────────────────────────────────────
+// Overrides highlight.js github-dark base to match the terminal palette.
+// Applied inside .instance-node so it only affects post card code blocks.
+
+.instance-node {
+  .hljs {
+    background: rgba(0, 0, 0, 0.6);
+    color: rgba($text-primary, 0.85);
+    border-left: 2px solid rgba($accent-neon, 0.3);
+    padding: 14px 16px;
+    font-size: 0.8rem;
+    line-height: 1.6;
+    overflow-x: auto;
+  }
+
+  // Keywords — if, return, const, etc.
+  .hljs-keyword,
+  .hljs-selector-tag,
+  .hljs-built_in { color: $accent-cyan; }
+
+  // Strings
+  .hljs-string,
+  .hljs-attr { color: rgba($accent-neon, 0.85); }
+
+  // Numbers, booleans
+  .hljs-number,
+  .hljs-literal { color: #f8e704; }
+
+  // Comments
+  .hljs-comment { color: rgba($accent-neon, 0.3); font-style: italic; }
+
+  // Function names, titles
+  .hljs-title,
+  .hljs-function .hljs-title { color: $accent-magenta; }
+
+  // Variables, params
+  .hljs-variable,
+  .hljs-params { color: rgba($text-primary, 0.7); }
+
+  // Types
+  .hljs-type,
+  .hljs-class .hljs-title { color: $accent-cyan; }
+}

@@ -27,17 +27,30 @@
     margin-bottom: 2rem;
   }
 
-  // SVG logo — forced black fill + neon ghost glow
+  // SVG logo — forced black fill + sharp edge glow, spins 180° clockwise on hover
   .brand-logo {
     width: 100px;
     height: 100px;
     object-fit: contain;
     margin-bottom: 1.5rem;
-    filter: brightness(0) drop-shadow(0 0 5px rgba($accent-neon, 0.65)) drop-shadow(0 0 10px rgba($accent-neon, 0.15));
-    transition: filter 0.4s ease;
+    filter:
+      brightness(0)
+      drop-shadow(0 0 5px rgba($accent-neon, 0.65))
+      drop-shadow(0 0 10px rgba($accent-neon, 0.15));
+    transition:
+      filter    0.35s ease,
+      transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    cursor: pointer;
 
     &:hover {
-      filter: brightness(0) drop-shadow(0 0 20px rgba($accent-neon, 0.6)) drop-shadow(0 0 50px rgba($accent-neon, 0.25));
+      // Layered tight → medium — the 0px blur on the first layer traces the exact silhouette edge
+      filter:
+        brightness(0)
+        drop-shadow(0 0 0px rgba($accent-neon, 1))
+        drop-shadow(0 0 2px rgba($accent-neon, 1))
+        drop-shadow(0 0 6px rgba($accent-neon, 0.7))
+        drop-shadow(0 0 14px rgba($accent-neon, 0.25));
+      transform: rotate(180deg);
     }
   }
 

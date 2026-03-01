@@ -152,7 +152,85 @@
     }
 
     h3 { margin: 0 0 10px 0; text-transform: uppercase; }
-    p  { margin: 0; opacity: 0.8; font-weight: 400; line-height: 1.6; }
+
+    // Markdown rendered output
+    .markdown-body {
+      opacity: 0.85;
+      font-weight: 400;
+      line-height: 1.7;
+      color: $text-primary;
+
+      // Headings
+      h1, h2, h3, h4 {
+        font-family: $font-main;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: $text-primary;
+        margin: 1.2em 0 0.5em;
+        &:first-child { margin-top: 0; }
+      }
+      h1 { font-size: 1.1rem; }
+      h2 { font-size: 0.95rem; }
+      h3 { font-size: 0.85rem; }
+
+      // Paragraphs
+      p { margin: 0 0 0.85em; font-size: 0.9rem; }
+      p:last-child { margin-bottom: 0; }
+
+      // Inline code
+      code {
+        font-family: monospace;
+        font-size: 0.8rem;
+        color: $accent-neon;
+        background: rgba($accent-neon, 0.07);
+        padding: 1px 5px;
+        border-radius: 2px;
+      }
+
+      // Code blocks
+      pre {
+        margin: 0.85em 0;
+        border-radius: 0;
+        overflow-x: auto;
+        code { background: none; padding: 0; color: inherit; }
+      }
+
+      // Blockquote
+      blockquote {
+        margin: 0.85em 0;
+        padding: 8px 16px;
+        border-left: 2px solid rgba($accent-cyan, 0.5);
+        color: rgba($text-primary, 0.6);
+        font-style: italic;
+        font-size: 0.85rem;
+        p { margin: 0; }
+      }
+
+      // Lists
+      ul, ol {
+        margin: 0.5em 0;
+        padding-left: 1.4em;
+        font-size: 0.9rem;
+        li { margin-bottom: 0.25em; }
+      }
+
+      // Horizontal rule
+      hr {
+        border: none;
+        border-top: 1px solid rgba($accent-neon, 0.2);
+        margin: 1em 0;
+      }
+
+      // Links
+      a {
+        color: $accent-cyan;
+        text-decoration: none;
+        &:hover { text-decoration: underline; }
+      }
+
+      // Strikethrough
+      del { opacity: 0.45; }
+    }
   }
 }
 
@@ -174,6 +252,29 @@
     background: rgba($accent-white, 0.1);
     border-color: $accent-white;
     box-shadow: 0 0 10px rgba($accent-white, 0.2);
+  }
+}
+
+// Empty feed state — shown when no posts exist
+.feed-empty {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 3rem 0;
+  font-family: monospace;
+  letter-spacing: 0.15em;
+  opacity: 0.35;
+  color: $accent-neon;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  animation: nodeEnter 0.6s ease backwards;
+
+  .feed-empty-sub {
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    opacity: 0.7;
   }
 }
 

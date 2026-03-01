@@ -1,0 +1,198 @@
+@import url("https://use.typekit.net/naj4gbr.css");
+
+$accent-neon:    #00ff8c;
+$accent-cyan:    #00d4ff;
+$accent-magenta: #dc08bc;
+$bg-black:       #080808;
+$text-primary:   #f9fefa;
+$font-main:      "omnium", sans-serif;
+
+// ─── Backdrop ────────────────────────────────────────────────────────────────
+
+.syntax-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: rgba(0, 0, 0, 0.78);
+  backdrop-filter: blur(10px) saturate(140%);
+  -webkit-backdrop-filter: blur(10px) saturate(140%);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  // Hidden state
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  &.is-open {
+    opacity: 1;
+    pointer-events: all;
+  }
+}
+
+
+// ─── Modal Panel ─────────────────────────────────────────────────────────────
+
+.syntax-modal {
+  position: relative;
+  width: 100%;
+  max-width: 580px;
+  margin: 0 20px;
+  padding: 32px;
+  box-sizing: border-box;
+
+  // Chamfered corners — matches instance-node
+  clip-path: polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px);
+
+  // Left border accent
+  border-left: 2px solid $accent-neon;
+
+  // Hidden + shifted down — slides up into place on open
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity   0.38s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.04s,
+    transform 0.38s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.04s;
+
+  &.is-open {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  // LAYER 1 — gradient border glow
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    background: linear-gradient(
+      135deg,
+      rgba($accent-neon, 0.6)    0%,
+      rgba(255, 255, 255, 0.07) 40%,
+      rgba($accent-cyan, 0.35)  70%,
+      rgba($accent-neon, 0.6)   100%
+    );
+    clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);
+    z-index: -2;
+    pointer-events: none;
+    opacity: 0.8;
+  }
+
+  // LAYER 2 — cosmic holographic background + golden-ratio bottom accent line
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 1px;
+    background:
+      linear-gradient($accent-neon, $accent-neon),
+      linear-gradient(145deg, #0a0a0a, #000000),
+      radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.06), transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(0, 0, 0, 0.6), transparent 50%),
+      linear-gradient(
+        45deg,
+        rgba(0, 255, 140, 0.03),
+        rgba(0, 212, 255, 0.04),
+        rgba(138, 43, 226, 0.03)
+      );
+    background-size: 33.33% 2px, 100% 100%, 150% 150%, 150% 150%, 200% 200%;
+    background-position: bottom left, 0% 50%, 75% 75%, 75% 75%, 50% 50%;
+    background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+    background-blend-mode: normal, overlay, multiply, overlay, normal;
+    clip-path: polygon(13px 0, 100% 0, 100% calc(100% - 13px), calc(100% - 13px) 100%, 0 100%, 0 13px);
+    z-index: -1;
+    pointer-events: none;
+  }
+}
+
+
+// ─── Header ──────────────────────────────────────────────────────────────────
+
+.syntax-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba($accent-neon, 0.15);
+}
+
+.syntax-modal-title {
+  font-family: monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  color: $accent-neon;
+  text-transform: uppercase;
+}
+
+.syntax-modal-close {
+  background: transparent;
+  border: 1px solid rgba($accent-neon, 0.3);
+  color: rgba($accent-neon, 0.6);
+  font-family: monospace;
+  font-size: 0.75rem;
+  padding: 2px 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: $accent-neon;
+    color: $accent-neon;
+    box-shadow: 0 0 8px rgba($accent-neon, 0.3);
+  }
+}
+
+
+// ─── Syntax Grid ─────────────────────────────────────────────────────────────
+
+.syntax-modal-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.syntax-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 16px;
+  padding: 6px 0;
+  border-bottom: 1px solid rgba($accent-neon, 0.05);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.syntax-input {
+  font-family: monospace;
+  font-size: 0.72rem;
+  color: $accent-neon;
+  letter-spacing: 0.05em;
+  background: rgba($accent-neon, 0.05);
+  padding: 3px 8px;
+  border-left: 1px solid rgba($accent-neon, 0.3);
+  white-space: nowrap;
+}
+
+.syntax-desc {
+  font-family: monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  color: rgba($text-primary, 0.5);
+  text-transform: uppercase;
+}
+
+
+// ─── Footer ──────────────────────────────────────────────────────────────────
+
+.syntax-modal-footer {
+  margin-top: 24px;
+  padding-top: 12px;
+  border-top: 1px solid rgba($accent-neon, 0.1);
+  font-family: monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.12em;
+  color: rgba($accent-neon, 0.3);
+  text-transform: uppercase;
+}

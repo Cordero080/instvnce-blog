@@ -10,6 +10,17 @@ const getAllPosts = async (req, res) => {
   }
 };
 
+// LOGIC: GET SINGLE POST BY ID
+const getPostById = async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+    if (!post) return res.status(404).json({ message: "Instance not found" });
+    res.status(200).json(post);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 // LOGIC: CREATE POST
 const createPost = async (req, res) => {
   const post = new Post({
@@ -61,6 +72,7 @@ const deletePost = async (req, res) => {
 // Exporting all logic as a single module
 module.exports = {
   getAllPosts,
+  getPostById,
   createPost,
   deletePost,
   updatePost,

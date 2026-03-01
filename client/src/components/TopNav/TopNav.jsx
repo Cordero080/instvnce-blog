@@ -1,7 +1,8 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './TopNav.scss';
 
-function TopNav() {
+function TopNav({ onOpenSyntax }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -20,18 +21,22 @@ function TopNav() {
 
       {/* Links — slide into view on expand */}
       <div className="top-nav-links">
-        <a href="#" className="top-nav-link top-nav-link--active">
+        <Link to="/" className="top-nav-link top-nav-link--active">
           <span className="link-label">FEED</span>
           <span className="link-glow-line" />
-        </a>
+        </Link>
         <a href="#" className="top-nav-link">
           <span className="link-label">ARCHIVE</span>
           <span className="link-glow-line" />
         </a>
-        <a href="#" className="top-nav-link">
+        <Link to="/about" className="top-nav-link">
           <span className="link-label">ABOUT</span>
           <span className="link-glow-line" />
-        </a>
+        </Link>
+        <button className="top-nav-link top-nav-link--syntax" onClick={onOpenSyntax}>
+          <span className="link-label">[?]</span>
+          <span className="link-glow-line" />
+        </button>
       </div>
 
       {/* Status pip — always visible, right side */}

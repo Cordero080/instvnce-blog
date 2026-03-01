@@ -1,0 +1,152 @@
+// ─── Post Detail Page ─────────────────────────────────────────────────────────
+// Full-width reading view for a single deployed instance.
+
+$accent-neon:    #00ff6ac7;
+$accent-cyan:    #00d4ff;
+$accent-magenta: #dc08bc;
+$bg-black:       #080808;
+$text-primary:   #f9fefa;
+$accent-white:   #eefdf6f4;
+$font-main:      "omnium", sans-serif;
+
+.post-detail-container {
+  max-width: 720px;
+  padding-top: 100px;
+}
+
+// ← FEED back button
+.post-detail-back {
+  background: transparent;
+  border: none;
+  color: rgba($accent-neon, 0.8);
+  font-family: monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 2.5rem;
+  transition: color 0.2s ease;
+  align-self: flex-start;
+
+  &:hover {
+    color: $accent-neon;
+    text-shadow: 0 0 8px rgba($accent-neon, 0.4);
+  }
+}
+
+// Full article card — same holographic system as instance-node
+.post-detail-node {
+  width: 100%;
+  padding: 40px;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1;
+
+  border-left: 2px solid $accent-neon;
+  clip-path: polygon(14px 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%, 0 14px);
+
+  animation: nodeEnter 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
+
+  // LAYER 1 — gradient border glow
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    background: linear-gradient(
+      135deg,
+      rgba($accent-neon, 0.6)    0%,
+      rgba(255, 255, 255, 0.07) 40%,
+      rgba($accent-cyan, 0.35)  70%,
+      rgba($accent-neon, 0.6)   100%
+    );
+    clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);
+    z-index: -2;
+    pointer-events: none;
+    opacity: 0.8;
+  }
+
+  // LAYER 2 — cosmic holographic bg + golden-ratio bottom line
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 1px;
+    background:
+      linear-gradient($accent-neon, $accent-neon),
+      linear-gradient(145deg, #0a0a0a, #000000),
+      radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.07), transparent 50%),
+      radial-gradient(circle at 75% 75%, rgba(0, 0, 0, 0.6), transparent 50%),
+      linear-gradient(
+        45deg,
+        rgba(0, 255, 140, 0.04),
+        rgba(0, 212, 255, 0.05),
+        rgba(138, 43, 226, 0.04)
+      );
+    background-size: 33.33% 2px, 100% 100%, 150% 150%, 150% 150%, 200% 200%;
+    background-position: bottom left, 0% 50%, 75% 75%, 75% 75%, 50% 50%;
+    background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+    background-blend-mode: normal, overlay, multiply, overlay, normal;
+    clip-path: polygon(13px 0, 100% 0, 100% calc(100% - 13px), calc(100% - 13px) 100%, 0 100%, 0 13px);
+    z-index: -1;
+    pointer-events: none;
+  }
+}
+
+// Meta row
+.post-detail-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  color: $accent-neon;
+  margin-bottom: 20px;
+  opacity: 0.8;
+
+  .status-tag {
+    border: 1px solid $accent-neon;
+    padding: 2px 5px;
+  }
+
+  .timestamp {
+    color: rgba($text-primary, 0.4);
+  }
+}
+
+// Post title — larger than card view
+.post-detail-title {
+  font-family: $font-main;
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: $text-primary;
+  margin: 0 0 28px;
+  line-height: 1.2;
+}
+
+// Markdown body — same as feed cards but with more breathing room
+.post-detail-body {
+  font-size: 1rem;
+  line-height: 1.8;
+  opacity: 0.88;
+
+  p { font-size: 1rem; margin-bottom: 1.1em; }
+  h1 { font-size: 1.3rem; }
+  h2 { font-size: 1.1rem; }
+  h3 { font-size: 0.95rem; }
+}
+
+@keyframes nodeEnter {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
