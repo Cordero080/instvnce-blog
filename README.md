@@ -1,4 +1,3 @@
-
                      ██╗███╗   ██╗███████╗████████╗██╗   ██╗███╗   ██╗ ██████╗███████╗
                      ██║████╗  ██║██╔════╝╚══██╔══╝██║   ██║████╗  ██║██╔════╝██╔════╝
                      ██║██╔██╗ ██║███████╗   ██║   ██║   ██║██╔██╗ ██║██║     █████╗
@@ -37,6 +36,8 @@ Most dev blogs look like Medium. This one looks like a monitoring dashboard.
 
 - **The architect voice** — posts are `ACTIVE_LOG` instances. The input says `AIM`. Delete says `TERMINATE`. The tone is not content marketing; it's raw operational log.
 - **CRT + holographic aesthetic** — a custom design system built from scratch: animated scanlines, clip-path chamfered cards, multi-layer holographic backgrounds, golden-ratio bottom accent lines that expand on hover.
+- **Color-coded operational states** — inputs shift hue dynamically as you type. Click `[EDIT]` and the form enters heavy-load yellow: text, border, and accent line all switch to signal you're modifying something live. `AIM` morphs to `FIRE` in red on hover. Green = deploy. Yellow = modify. Red = destroy. No labels needed.
+- **3D braces** — the `{ }` framing the input form are real Three.js geometry: metallic material, triple-point neon lighting, floating animation. WebGL just to frame a text input.
 - **Honest format** — no SEO filler, no "in this post I will". Just the thought, the decision, the thing learned.
 - **Full control** — self-hosted, no CMS, no platform risk. You own every instance.
 
@@ -46,13 +47,14 @@ Most dev blogs look like Medium. This one looks like a monitoring dashboard.
 
 ## Stack
 
-| Layer | Tech |
-|-------|------|
-| Frontend | React + Vite |
-| Styling | SCSS (custom design system) |
-| Backend | Node / Express |
-| Database | MongoDB |
-| Font | Omnium (Adobe Fonts) |
+| Layer    | Tech                                   |
+| -------- | -------------------------------------- |
+| Frontend | React + Vite                           |
+| Styling  | SCSS (custom design system)            |
+| 3D       | Three.js via @react-three/fiber + drei |
+| Backend  | Node / Express                         |
+| Database | MongoDB                                |
+| Font     | Omnium (Adobe Fonts)                   |
 
 ![Deployed instance](.github/assets/instance-post.png)
 
