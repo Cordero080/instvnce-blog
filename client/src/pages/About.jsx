@@ -1,6 +1,4 @@
 import './About.scss';
-import logoOne from '../assets/logo-one.svg';
-
 export default function About() {
   return (
     <>
@@ -8,8 +6,7 @@ export default function About() {
       <div className="app-container about-container">
 
         <div className="title-container">
-          <img src={logoOne} alt="INSTVNCE logo" className="brand-logo" />
-          <h1 className="architect-title">
+<h1 className="architect-title">
             <span className="bracket">[</span>
             AB<span className="title-v">O</span>UT
             <span className="bracket">]</span>

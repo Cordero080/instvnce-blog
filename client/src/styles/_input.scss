@@ -131,15 +131,16 @@ $holo-bg-blend:    overlay,  multiply,  overlay;
       // Chamfered corners — matches numen-src small variant
       clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
 
-      // Bottom progress line stacked on top of holographic background
+      // Teal holographic background — dark teal base so inputs lift off the black card.
+      // Progress line stacked as top layer above the gradient stack.
       background:
         linear-gradient(#29f804, #29f804),
-        linear-gradient(145deg, #0a0a0a, #000000),
-        radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.05), transparent 50%),
-        radial-gradient(circle at 75% 75%, rgba(0, 0, 0, 0.5), transparent 50%),
-        linear-gradient(45deg, rgba(138, 43, 226, 0.04), rgba(0, 212, 255, 0.04), rgba(138, 43, 226, 0.04));
+        linear-gradient(180deg, #062020, #031515),
+        radial-gradient(circle at 50% 40%, rgba(0, 212, 255, 0.18), transparent 70%),
+        radial-gradient(circle at 80% 80%, rgba(0, 0, 0, 0.4), transparent 50%),
+        linear-gradient(45deg, rgba(0, 212, 255, 0.08), rgba(0, 255, 140, 0.07), rgba(0, 212, 255, 0.08));
       background-size:     33.33% 2px, 100% 100%, 150% 150%, 150% 150%, 200% 200%;
-      background-position: bottom left, 0% 50%, 75% 75%, 75% 75%, 50% 50%;
+      background-position: bottom left, 0% 50%, 50% 50%, 75% 75%, 50% 50%;
       background-repeat:   no-repeat;
       background-blend-mode: normal, overlay, multiply, overlay;
 
@@ -231,5 +232,20 @@ $holo-bg-blend:    overlay,  multiply,  overlay;
       0  0 100px rgba($accent-neon, 0.04);
     border-color: rgba($accent-neon, 0.3);
     transition: box-shadow 0.5s ease, border-color 0.5s ease;
+
+    // Revert inputs to black holographic in abyss mode
+    input, textarea {
+      background:
+        linear-gradient(#29f804, #29f804),
+        linear-gradient(145deg, #0a0a0a, #000000),
+        radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.05), transparent 50%),
+        radial-gradient(circle at 75% 75%, rgba(0, 0, 0, 0.5), transparent 50%),
+        linear-gradient(45deg, rgba(138, 43, 226, 0.04), rgba(0, 212, 255, 0.04), rgba(138, 43, 226, 0.04));
+      background-size:     33.33% 2px, 100% 100%, 150% 150%, 150% 150%, 200% 200%;
+      background-position: bottom left, 0% 50%, 75% 75%, 75% 75%, 50% 50%;
+      background-repeat:   no-repeat;
+      background-blend-mode: normal, overlay, multiply, overlay;
+      transition: background 0.5s ease;
+    }
   }
 }
