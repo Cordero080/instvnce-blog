@@ -16,6 +16,16 @@
   left: calc(100% + 10px);
 }
 
+/* Abyss mode — crank up brightness so braces glow out of the dark */
+html.abyss .brace-canvas-wrapper {
+  filter: brightness(1.9) saturate(1.2);
+  transition: filter 0.5s ease;
+}
+
+.brace-canvas-wrapper {
+  transition: filter 0.5s ease;
+}
+
 /* Hide when there's no room beside the form */
 @media (max-width: 900px) {
   .brace-canvas-wrapper {

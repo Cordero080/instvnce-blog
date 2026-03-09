@@ -62,3 +62,12 @@ html, body, #root {
 body {
   overflow-x: hidden;
 }
+
+// ── Abyss mode — triggered by html.abyss (toggled via JS) ────────────────
+// Darkens the background to pure black across all root elements.
+html.abyss,
+html.abyss body,
+html.abyss #root {
+  background-color: #000000;
+  transition: background-color 0.5s ease;
+}

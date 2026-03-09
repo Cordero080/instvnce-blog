@@ -78,7 +78,14 @@ export default function Feed({ isSyntaxOpen }) {
         </div>
 
         <div className="title-container">
-          <img src={logoOne} alt="INSTVNCE logo" className="brand-logo" />
+          <div className="brand-logo-glow">
+            <div
+              className="brand-logo"
+              role="img"
+              aria-label="INSTVNCE logo"
+              style={{ WebkitMaskImage: `url(${logoOne})`, maskImage: `url(${logoOne})` }}
+            />
+          </div>
           <h1 className="architect-title">
             <span className="bracket">[</span>
             INST<span className="title-v">V</span>NCE<span className="title-underscore">_</span>BLOG

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './TopNav.scss';
 
-function TopNav({ onOpenSyntax }) {
+function TopNav({ onOpenSyntax, isDark, onToggleDark }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -39,8 +39,18 @@ function TopNav({ onOpenSyntax }) {
         </button>
       </div>
 
-      {/* Status pip — always visible, right side */}
+      {/* Status pip + depth toggle — always visible, right side */}
       <div className="top-nav-status">
+        <button
+          className={`depth-switch ${isDark ? 'active' : ''}`}
+          onClick={onToggleDark}
+          aria-label="Toggle abyss mode"
+          title={isDark ? 'ABYSS ON' : 'ABYSS OFF'}
+        >
+          <span className="depth-switch__track">
+            <span className="depth-switch__thumb" />
+          </span>
+        </button>
         <span className="status-pip" />
         <span className="status-label">ONLINE</span>
       </div>

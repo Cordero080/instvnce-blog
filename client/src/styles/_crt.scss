@@ -2,6 +2,12 @@
 // Fixed full-screen effect layered behind all content (z-index: 5).
 // Fades out when .fade class is applied (triggered while typing).
 
+// In abyss mode the CRT red is suppressed so the black background reads true
+html.abyss .crt-overlay {
+  opacity: 0.08;
+  transition: opacity 0.5s ease;
+}
+
 .crt-overlay {
   position: fixed;
   top: 0;
@@ -22,4 +28,5 @@
   );
   background-size: 100% 4px, 4px 100%;
   opacity: 0.6;
+  transition: opacity 0.5s ease;
 }

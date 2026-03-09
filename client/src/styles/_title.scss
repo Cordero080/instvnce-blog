@@ -35,34 +35,67 @@
   }
 
   // ── 3. Brand Logo ─────────────────────────────────────────────────────────
-  // SVG logo — forced black fill + sharp edge glow, spins 180° clockwise on hover
-  .brand-logo {
+  // Two-layer structure:
+  //   .brand-logo-glow — outer wrapper that carries drop-shadow + spin transform.
+  //                      filter here sees the composited masked child, so the
+  //                      glow correctly traces the logo silhouette.
+  //   .brand-logo      — inner div: SVG mask + holographic bg + shimmer animation.
+
+  .brand-logo-glow {
     width: 100px;
     height: 100px;
-    object-fit: contain;
     margin-bottom: 1.5rem;
+    cursor: pointer;
+    flex-shrink: 0;
+    // Sharp neon edge + bloom — 0px blur traces the exact silhouette contour
     filter:
-      brightness(0)
-      drop-shadow(0 0 5px rgba($accent-neon, 0.65))
-      drop-shadow(0 0 10px rgba($accent-neon, 0.15));
+      drop-shadow(0 0 0px $accent-neon)
+      drop-shadow(0 0 3px rgba($accent-neon, 0.65));
     transition:
       filter    0.35s ease,
       transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    cursor: pointer;
 
     &:hover {
-      // Layered tight → medium — the 0px blur on the first layer traces the exact silhouette edge
       filter:
-        brightness(0)
-        drop-shadow(0 0 0px rgba($accent-neon, 1))
-        drop-shadow(0 0 2px rgba($accent-neon, 1))
-        drop-shadow(0 0 6px rgba($accent-neon, 0.7))
-        drop-shadow(0 0 14px rgba($accent-neon, 0.25));
+        brightness(1.8)
+        drop-shadow(0 0 0px $accent-neon)
+        drop-shadow(0 0 1px $accent-neon)
+        drop-shadow(0 0 3px rgba($accent-neon, 0.65));
       transform: rotate(180deg);
     }
   }
 
+  .brand-logo {
+    width: 100%;
+    height: 100%;
+
+    // Mask: logo silhouette cuts the holographic bg
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    -webkit-mask-size: contain;
+
+    // Holographic 4-layer background — visible through the mask
+    background:
+      linear-gradient(145deg, #0d0d0d, #000000),
+      radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.1), transparent 50%),
+      radial-gradient(circle at 75% 75%, rgba(0, 0, 0, 0.55), transparent 50%),
+      linear-gradient(45deg,
+        rgba(138, 43, 226, 0.12),
+        rgba(0, 212, 255, 0.08),
+        rgba(0, 255, 140, 0.08)
+      );
+    background-size:       100% 100%, 150% 150%, 150% 150%, 200% 200%;
+    background-position:   0% 50%,   65% 65%,   65% 65%,   30% 50%;
+    background-blend-mode: overlay,  multiply,  overlay;
+  }
+
   // ── 4. Architect Title ────────────────────────────────────────────────────
+  // .architect-title--fallback is the CSS version — hidden on wide screens
+  // where Title3D (WebGL) takes over. Shown below 720px via Title3D.css hiding.
+
   // Main heading with character-level treatments and 3D black drop shadow.
   // text-shadow layers:
   //   - 1px–4px stacked solid black offsets = chunky 3D extrusion depth
@@ -81,15 +114,14 @@
     align-items: center;
     justify-content: center;
     text-shadow:
-      // 3D extrusion — stacked solid black steps
-      1px 1px 0 #000000ae,
-      2px 2px 0 #000,
-      3px 3px 0 #000,
-      4px 4px 0 #000,
-      // Shadow falloff — fades and blurs below the extrusion
-      5px 5px 0   rgba(0, 0, 0, 0.6),
-      6px 6px 8px rgba(0, 0, 0, 0.4),
-      // Ambient neon glow — green halo, sits on top of shadow
+      // 3D extrusion — solid steps, slightly softened opacity
+      1px 1px 0 rgba(0, 0, 0, 0.85),
+      2px 2px 0 rgba(0, 0, 0, 0.8),
+      3px 3px 0 rgba(0, 0, 0, 0.7),
+      4px 4px 0 rgba(0, 0, 0, 0.55),
+      // Shadow falloff
+      5px 5px 5px rgba(0, 0, 0, 0.3),
+      // Ambient neon glow
       0 0 10px rgba($accent-neon, 0.2),
       0 0 20px rgba($accent-neon, 0.2);
 
@@ -153,6 +185,15 @@
 }
 
 // ── 6. Animations ─────────────────────────────────────────────────────────────
+// logoHoloShimmer — drifts the radial highlights across the logo so the
+// holographic surface feels alive. Ported from numen-src dark-holographic-shimmer.
+@keyframes logoHoloShimmer {
+  0%   { background-position: 0% 50%,  50%  50%,  50%  50%,  0%   50%; }
+  50%  { background-position: 0% 50%,  100% 100%, 100% 100%, 100% 50%; }
+  100% { background-position: 0% 50%,  50%  50%,  50%  50%,  0%   50%; }
+}
+
+
 // hypnoticWarp — used by .title-divider::after on hover.
 // Cycles through scale, skew, letter-spacing, and color across 6 keyframe steps.
 @keyframes hypnoticWarp {

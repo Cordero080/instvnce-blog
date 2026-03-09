@@ -1,0 +1,25 @@
+/* ── Title3D Canvas Wrapper ─────────────────────────────────────────────────
+   Sized to hold the full title string. The canvas fills the wrapper and
+   inherits transparent background from the page.
+   Adjust width/height here if the text overflows or looks too small.
+───────────────────────────────────────────────────────────────────────────── */
+
+.title3d-wrapper {
+  width: 680px;
+  height: 120px;
+  max-width: 100%;
+  pointer-events: none; /* title is decorative — don't block clicks */
+}
+
+.title3d-wrapper canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* On narrow screens fall back to the CSS title via media query in Feed */
+@media (max-width: 720px) {
+  .title3d-wrapper {
+    display: none;
+  }
+}
