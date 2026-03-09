@@ -72,7 +72,7 @@ export default function Feed({ isSyntaxOpen }) {
 
       <div className="app-container">
         <div className="system-diagnostics">
-          <span>STATUS: ONLINE</span>
+          <span>ARCH: PVBLO</span>
           <span>INSTANCES_DEPLOYED: {posts.length}</span>
           <span>{new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: '2-digit' }).toUpperCase()}</span>
         </div>
