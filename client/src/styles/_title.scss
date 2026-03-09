@@ -1,9 +1,15 @@
 // ─── Title Block ─────────────────────────────────────────────────────────────
-// Logo, page title, bracket treatment, and divider.
+// Sections:
+//   1. Legacy h1       — fallback heading styles (kept for safety)
+//   2. Title Container — flex wrapper that centers logo + title + divider
+//   3. Brand Logo      — SVG logo filter, glow, and hover spin
+//   4. Architect Title — main [ INSTVNCE_BLOG ] heading, 3D shadow, char styles
+//   5. Title Divider   — full-bleed neon rule with "useWisely();" label
+//   6. Animations      — @keyframes hypnoticWarp (divider label hover warp)
 
 .app-container {
 
-  // Legacy h1 (kept for safety)
+  // ── 1. Legacy h1 ──────────────────────────────────────────────────────────
   h1 {
     text-shadow: 0 0 10px rgba($text-primary, 0.2);
     letter-spacing: 0.1em;
@@ -18,6 +24,7 @@
     }
   }
 
+  // ── 2. Title Container ────────────────────────────────────────────────────
   .title-container {
     width: 100%;
     display: flex;
@@ -27,6 +34,7 @@
     margin-bottom: 2rem;
   }
 
+  // ── 3. Brand Logo ─────────────────────────────────────────────────────────
   // SVG logo — forced black fill + sharp edge glow, spins 180° clockwise on hover
   .brand-logo {
     width: 100px;
@@ -54,7 +62,12 @@
     }
   }
 
-  // [ INSTVNCE_BLOG ] heading with character-level treatments
+  // ── 4. Architect Title ────────────────────────────────────────────────────
+  // Main heading with character-level treatments and 3D black drop shadow.
+  // text-shadow layers:
+  //   - 1px–4px stacked solid black offsets = chunky 3D extrusion depth
+  //   - 5px semi-transparent + 6px blurred  = soft shadow falloff beneath
+  //   - neon glow layers                    = ambient green halo on top
   .architect-title {
     font-family: "omnium", sans-serif;
     font-weight: 700;
@@ -67,8 +80,20 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    text-shadow: 0 0 10px rgba($accent-neon, 0.2), 0 0 20px rgba($accent-neon, 0.2);
+    text-shadow:
+      // 3D extrusion — stacked solid black steps
+      1px 1px 0 #000000ae,
+      2px 2px 0 #000,
+      3px 3px 0 #000,
+      4px 4px 0 #000,
+      // Shadow falloff — fades and blurs below the extrusion
+      5px 5px 0   rgba(0, 0, 0, 0.6),
+      6px 6px 8px rgba(0, 0, 0, 0.4),
+      // Ambient neon glow — green halo, sits on top of shadow
+      0 0 10px rgba($accent-neon, 0.2),
+      0 0 20px rgba($accent-neon, 0.2);
 
+    // Dim bracket chars flanking the title
     .bracket {
       color: rgba($accent-neon, 0.4);
       margin: 0 15px;
@@ -93,7 +118,9 @@
     }
   }
 
-  // Full-bleed neon divider with "useWisely();" label
+  // ── 5. Title Divider ──────────────────────────────────────────────────────
+  // Full-bleed neon rule with "useWisely();" label centered above it.
+  // Label warps hypnotically on hover via @keyframes hypnoticWarp.
   .title-divider {
     width: 170%;
     height: 2px;
@@ -125,6 +152,9 @@
   }
 }
 
+// ── 6. Animations ─────────────────────────────────────────────────────────────
+// hypnoticWarp — used by .title-divider::after on hover.
+// Cycles through scale, skew, letter-spacing, and color across 6 keyframe steps.
 @keyframes hypnoticWarp {
   0% {
     transform: translateX(-50%) scaleX(1)    scaleY(1)    skewX(0deg);
