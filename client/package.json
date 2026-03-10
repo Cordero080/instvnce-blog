@@ -19,6 +19,7 @@
     "react-markdown": "^10.1.0",
     "react-router-dom": "^7.13.1",
     "rehype-highlight": "^7.0.2",
+    "remark-gfm": "^4.0.1",
     "sass": "^1.97.3",
     "three": "^0.183.2"
   },

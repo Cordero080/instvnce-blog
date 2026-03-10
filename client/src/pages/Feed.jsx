@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import ReactMarkdown from 'react-markdown';
 import rehypeHighlight from 'rehype-highlight';
+import remarkGfm from 'remark-gfm';
 import logoOne from '../assets/logo-one.svg';
 import Braces3D from '../components/Braces3D/Braces3D';
 
@@ -146,7 +147,7 @@ export default function Feed({ isSyntaxOpen }) {
             </div>
             <h3>{post.title}</h3>
             <div className="markdown-body">
-              <ReactMarkdown rehypePlugins={[rehypeHighlight]}>
+              <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeHighlight]}>
                 {post.content}
               </ReactMarkdown>
             </div>

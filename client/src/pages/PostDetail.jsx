@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import ReactMarkdown from 'react-markdown';
 import rehypeHighlight from 'rehype-highlight';
+import remarkGfm from 'remark-gfm';
 import './PostDetail.scss';
 
 export default function PostDetail() {
@@ -59,7 +60,7 @@ export default function PostDetail() {
             <h2 className="post-detail-title">{post.title}</h2>
 
             <div className="markdown-body post-detail-body">
-              <ReactMarkdown rehypePlugins={[rehypeHighlight]}>
+              <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeHighlight]}>
                 {post.content}
               </ReactMarkdown>
             </div>

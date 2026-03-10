@@ -114,6 +114,11 @@ $holo-bg-blend:    overlay,  multiply,  overlay;
     // ── 3. Inputs & Textarea ──────────────────────────────────────────────────
     // Holographic background with the bottom progress line stacked as the
     // top layer so it renders above the gradient stack.
+    // Chamfered corners on single-line input only — textarea needs its resize handle intact
+    input {
+      clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
+    }
+
     input, textarea {
       box-sizing: border-box;
       color: #29f804;
@@ -128,8 +133,6 @@ $holo-bg-blend:    overlay,  multiply,  overlay;
       width: 100%;
       resize: vertical;
       overflow-y: auto;
-      // Chamfered corners — matches numen-src small variant
-      clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
 
       // Teal holographic background — dark teal base so inputs lift off the black card.
       // Progress line stacked as top layer above the gradient stack.
