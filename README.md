@@ -106,4 +106,25 @@ The blog is a map of the territory you're building in.
 
 ---
 
+---
+
+## Stretch Goals
+
+### `[?]` Raw Markdown Toggle — per post card
+
+A small round button positioned outside and adjacent to each post card, styled with the holographic black design system (chamfered clip-path, gradient border, cosmic bg). It contains a `?` glyph.
+
+**Behavior:**
+- Clicking it toggles the post body between:
+  - **Rendered view** — ReactMarkdown output (current default)
+  - **Raw view** — the original markdown source, displayed in a monospace `<pre>` block with the same terminal styling as the input textarea
+
+**Design notes:**
+- Button is round, ~32px, positioned top-right outside the card boundary (absolute, negative offset)
+- Active state: button glows brighter / border shifts to cyan to signal raw mode is on
+- Toggle is per-card, not global — each instance manages its own view state
+- No backend changes needed — `post.content` already stores the raw markdown string
+
+---
+
 `STATUS: ONLINE` `INSTANCES_DEPLOYED: ACTIVE` `LOG_LEVEL: ARCHITECT`
