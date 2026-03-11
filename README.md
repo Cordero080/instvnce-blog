@@ -10,7 +10,7 @@
 
 ---
 
-![INSTVNCE_BLOG — full interface with nav, diagnostics bar, 3D braces, and holographic input form](client/public/screenshots/instance-nav.png)
+![INSTVNCE_BLOG — full landing view with diagnostics bar, holographic logo, title, 3D braces, and teal input form](client/public/screenshots/instance-home.png)
 
 ---
 
@@ -35,6 +35,9 @@ The aesthetic is neopunk terminal: CRT scanline overlays, holographic post cards
 Most dev blogs look like Medium. This one looks like a monitoring dashboard.
 
 - **The architect voice** — posts are `ACTIVE_LOG` instances. The input says `AIM`. Delete says `TERMINATE`. The tone is not content marketing; it's raw operational log.
+
+![Navigation — FEED, ARCHIVE, ABOUT, and the [?] markdown reference, revealed on hover with neon underline states and an ONLINE status indicator](client/public/screenshots/instance-nav.png)
+
 - **CRT + holographic aesthetic** — a custom design system built from scratch: animated scanlines, clip-path chamfered cards, multi-layer holographic backgrounds, golden-ratio bottom accent lines that expand on hover.
 - **Color-coded operational states** — inputs shift hue dynamically as you type. Click `[EDIT]` and the form enters heavy-load yellow: text, border, and accent line all switch to signal you're modifying something live. `AIM` morphs to `FIRE` in red on hover. Green = deploy. Yellow = modify. Red = destroy. No labels needed.
 
